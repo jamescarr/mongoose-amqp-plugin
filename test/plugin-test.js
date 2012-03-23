@@ -1,21 +1,13 @@
 var should        = require('should')
-  , mongoose      = require('mongoose')
-  , Schema        = mongoose.Schema
-  , mongoose_amqp = require('../index')
   , amqp          = require('amqp')
+  , User          = require('./examples/simple')
+  , helper        = require('./helpers/mongoose')
 
-var UserSchema = new Schema({
-    name: String
-  , email: String
-})
-
-UserSchema.plugin(mongoose_amqp, {exchange:'user'});
-var User = mongoose.model('user', UserSchema)
 
 describe('Mongoose AMQP', function(){
   var queue = null, connection = null;
   before(function(done){
-    mongoose.connect('mongodb://localhost/mongoose-amqp-test', function(){
+    helper.before(function(){
       User.remove(function(){
         createAmqpConnection(function(conn, q){
           queue = q;
@@ -26,7 +18,7 @@ describe('Mongoose AMQP', function(){
     });
   });
   after(function(){
-    mongoose.disconnect();
+    helper.after()
     connection.end();
   });
 
@@ -45,8 +37,9 @@ describe('Mongoose AMQP', function(){
   it('should publish deletions', function(done){
     connection.queue('mongoose-amqp-test-deletions', function(q){
       q.bind('user', 'user.remove');
-      q.subscribe(function(user){
+      q.subscribe(function(user, dontcate, props){
         user._id.should.eql(james._id.toString());
+        q.unsubscribe(props.consumerTag);
         done()
       });
       
