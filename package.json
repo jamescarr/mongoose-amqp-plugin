@@ -1,10 +1,11 @@
 {
-  "author": "James R. Carr <james.r.carr@gmail.com> (http://blog.james-carr.org)",
-  "name": "mongoose-amqp-plugin",
-  "description": "A plugin that publishes mongoose models over amqp on save",
-  "version": "0.0.1",
-  "repository": {
-    "url": ""
+    "author": "James R. Carr <james.r.carr@gmail.com> (http://blog.james-carr.org)"
+  , "name": "mongoose-amqp-plugin"
+  , "description": "A plugin that publishes mongoose models over amqp on save"
+  , "version": "0.1.0"
+  , "repository": {
+        "type":"git"
+      , "url": "git://github.com/jamescarr/mongoose-amqp-plugin"
   },
   "scripts": {
     "test": "mocha"
