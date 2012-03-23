@@ -3,6 +3,14 @@ This is a handy pluigin that makes mongoose models publish to an AMQP
 exchange on save. This can be handy if you want to update other systems
 when a change happens to one of your models. 
 
+## Installing
+
+```bash
+npm install mongoose-amqp-plugin
+```
+
+Or include it in your package.json.
+
 
 ## Message Types
 The plugin will cause two different types of messages to be triggered:
