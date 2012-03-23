@@ -1,7 +1,15 @@
 # mongoose-amqp-plugin
 This is a handy pluigin that makes mongoose models publish to an AMQP
 exchange on save. This can be handy if you want to update other systems
-when a change happens to one of your models.
+when a change happens to one of your models. 
+
+
+## Message Types
+The plugin will cause two different types of messages to be triggered:
+**update** and **remove**. These get triggered on save and remove,
+respectively. Each message will have a routing key that fits the form
+<exchangeName>.update and <exchangeName>.remove. See the tests for
+further examples. 
 
 
 ## Example Usage
@@ -18,6 +26,14 @@ var User = new Schema({
 
 User.plugin(mongoose_amqp, {exchange:'users'})
 
+```
+
+Or providing an amqp connector url:
+```javascript
+User.plugin(mongoose_amqp, {
+    exchange:'users',
+  , url:'amqp://guest:guest@localhost:5672/application-name'
+})
 
 ```
 
@@ -26,9 +42,10 @@ User.plugin(mongoose_amqp, {exchange:'users'})
 The first argument is obviously the plugin. The second argument is an
 options object, all of which one (exchange) are optional but contain smart defaults.
 
-  * `exchange` - the exchange to publish the model to on save.
+  * `exchange` - the exchange to publish the model to on save. The
+    exchange type defaults to a topic exchange.
   * `url` - connector url of the amqp broker. For example amqp://guest:guest@localhost:5672
-
+  
   
 ## License 
 
