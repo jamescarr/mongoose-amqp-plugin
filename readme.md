@@ -42,7 +42,7 @@ Or providing an amqp connector url:
 
 User.plugin(mongoose_amqp, {
     exchange:'users',
-  , url:'amqp://guest:guest@localhost:5672/application-name'
+  , url:'amqps://guest:guest@localhost:5672/mySpecialVhost'
 })
 
 ```
