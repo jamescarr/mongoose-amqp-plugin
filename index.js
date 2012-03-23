@@ -3,6 +3,7 @@ var amqp = require('amqp')
 module.exports = exports = function amqpPlugin(schema, options){
   connect(options, function(ex){
     schema.post('save', function(){
+      console.log('saving')
       ex.publish(ex.name+'.update', this)
     });
     schema.post('remove', function(){
