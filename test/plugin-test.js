@@ -4,7 +4,7 @@ var should        = require('should')
   , helper        = require('./helpers/mongoose')
 
 
-describe('Mongoose AMQP', function(){
+describe('Mongoose Simple AMQP', function(){
   var queue = null, connection = null;
   before(function(done){
     helper.before(function(){

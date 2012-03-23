@@ -1,6 +1,5 @@
 var amqp = require('amqp')
 
-
 module.exports = exports = function amqpPlugin(schema, options){
   connect(options, function(ex){
     schema.post('save', function(){
@@ -14,15 +13,13 @@ module.exports = exports = function amqpPlugin(schema, options){
 
 
 function connect(options, callback){
-  conn = amqp.createConnection()
+  var conn = amqp.createConnection(options)
   conn.on('error', function(){
-    console.log("unable to connect to rabbitmq.Retrying in 5000ms");
     setTimeout(function(){
       connect(options, callback);
     }, 5000);
   });
   conn.on('ready', function(){
-    var ex = conn.exchange(options.exchange)
-    callback(ex);
+    callback(conn.exchange(options.exchange))
   });
 }

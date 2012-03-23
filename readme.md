@@ -27,13 +27,10 @@ The first argument is obviously the plugin. The second argument is an
 options object, all of which one (exchange) are optional but contain smart defaults.
 
   * `exchange` - the exchange to publish the model to on save.
-  * `host` - host of the amqp broker. Defaults to localhost
-  * `port` - port of the amqp broker. Defaults to 5672
-  * `username` - the username to login with. Defaults to guest.
-  * `password` - the password to login with. Defaults to guest.
-  * `vhost`    - the vhost to connect to. Defaults to '/'
+  * `url` - connector url of the amqp broker. For example amqp://guest:guest@localhost:5672
+
   
-cense 
+## License 
 
 (The MIT License)
 
