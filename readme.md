@@ -29,7 +29,9 @@ User.plugin(mongoose_amqp, {exchange:'users'})
 ```
 
 Or providing an amqp connector url:
+
 ```javascript
+
 User.plugin(mongoose_amqp, {
     exchange:'users',
   , url:'amqp://guest:guest@localhost:5672/application-name'
