@@ -19,6 +19,7 @@ conn.on('ready', function(){
   conn.queue('mongoose-amqp-example', function(q){
     q.bind('user', '#')
     em.emit('subscribed');
+
     q.subscribe(function(user, headers, deliveryInfo){
       console.log(user);
       console.log("routing key: " + deliveryInfo.routingKey)

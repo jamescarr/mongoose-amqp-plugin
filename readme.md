@@ -47,6 +47,30 @@ User.plugin(mongoose_amqp, {
 
 ```
 
+That's it! Now when ever you save or remove a single model, a message
+will be published to the designated AMQP broker. 
+
+So publishing a message is as simple as 
+
+```javascript
+
+var user = new User({
+    name:'Homer Simpson'
+  , email:'homer@example.com'
+});
+
+user.save()
+
+```
+
+### Why!?
+For my usecase, I wanted my mongodb objects to be broadcasted to
+rabbitmq for delayed indexing in elasticsearch. I'm sure there are
+plenty of other use cases that this solution would be helpful. 
+
+## Documentation
+
+
 ### Model.plugin(mongoose_amqp, options)
 
 The first argument is obviously the plugin. The second argument is an
